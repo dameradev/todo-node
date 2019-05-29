@@ -6,10 +6,27 @@ const taskSchema = new Schema({
     type: String,
     required: true
   },
+  status: {
+    type: String,
+    enum: ['new', 'finished'],
+    default: 'new'
+  },
   userId: {
     type: mongoose.Types.ObjectId,
     required: true
   }
 });
 
+
 module.exports = mongoose.model("Task", taskSchema);
+
+
+
+// const Status = Object.freeze({
+//   Finished: 'finished',
+//   Unfinished: 'unfinished'
+// }) 
+// enum: Object.values(Status);
+// Object.assign(taskSchema.statics, {
+//   Status,
+// });

@@ -21,5 +21,17 @@ exports.postAddTask = async (req, res, next) => {
 
   res.redirect('/tasks/task-list');
 }
-exports.postFinishTask = (req, res, next) =>{}
-exports.postDeleteTask = (req, res, next) =>{}
+exports.postFinishTask = async (req, res, next) => {
+  const taskId = req.body.taskId;
+  
+  const task = await Task.findById(taskId);
+
+  if (task.status === 'new') {
+    task.status = 'finished';
+  } else if (task.status === 'finished') {
+    task.status = 'new';
+  }
+  await task.save();
+  res.redirect('/tasks/task-list');
+}
+exports.postDeleteTask = (req, res, next) => {}

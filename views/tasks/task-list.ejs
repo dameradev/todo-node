@@ -6,7 +6,12 @@
 
   <% tasks.forEach(task=>{ %>
     <ul>
+      <%= task.status %>
       <li><%= task.content %></li>
+      <form action="/tasks/finish-task" method="POST">
+        <input type="hidden" name="taskId" value="<%= task._id %>">
+        <button type="sumbit">Finish Task</button>
+      </form>
     </ul>
   <% }) %>
   <form action="/tasks/add-task" method="POST">

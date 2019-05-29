@@ -7,7 +7,7 @@ router.get('/task-list', tasksController.getTasks);
 router.post('/add-task', tasksController.postAddTask);
 
 // router.get('/login', authController.getLogin);
-// router.post('/login', authController.postLogin);
+router.post('/finish-task', tasksController.postFinishTask);
 
 
 module.exports = router;
