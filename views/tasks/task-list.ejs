@@ -7,6 +7,7 @@
   <% tasks.forEach(task=>{ %>
     <ul>
       <%= task.status %>
+      <%= task.priority %>
       <li><%= task.content %></li>
       <form action="/tasks/finish-task" method="POST">
         <input type="hidden" name="taskId" value="<%= task._id %>">
@@ -15,6 +16,21 @@
       <form action="/tasks/delete-task" method="POST">
         <input type="hidden" name="taskId" value="<%= task._id %>">
         <button type="sumbit">Remove task</button>
+      </form>
+      <form action="/tasks/change-priority" method="POST">
+        <input type="hidden" name="taskId" value="<%= task._id %>">
+        <input type="hidden" name="priorityValue" value="1" >
+        <button type="submit">Low</button>
+      </form>
+      <form action="/tasks/change-priority" method="POST">
+        <input type="hidden" name="taskId" value="<%= task._id %>">
+        <input type="hidden" name="priorityValue" value="2" >
+        <button type="submit">Medium</button>
+      </form>
+      <form action="/tasks/change-priority" method="POST">
+        <input type="hidden" name="taskId" value="<%= task._id %>">
+        <input type="hidden" name="priorityValue" value="3" >
+        <button type="submit">High</button>
       </form>
     </ul>
   <% }) %>

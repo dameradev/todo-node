@@ -11,6 +11,11 @@ const taskSchema = new Schema({
     enum: ['new', 'finished'],
     default: 'new'
   },
+  priority: {
+    type: String,
+    enum: ['low', 'medium', 'high'],
+    default: 'low'
+  },
   userId: {
     type: mongoose.Types.ObjectId,
     required: true

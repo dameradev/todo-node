@@ -44,3 +44,23 @@ exports.postDeleteTask = async (req, res, next) => {
   await Task.findOneAndDelete(taskId);
   res.redirect('/tasks/task-list');
 }
+
+exports.postChangePriorty = async (req, res, next) => {
+  const taskId = req.body.taskId;
+  const priorityValue = req.body.priorityValue;
+  const task = await Task.findById(taskId);
+  console.log(priorityValue);
+  switch (priorityValue){
+    case "1":
+    task.priority = 'low'
+    break;
+    case "2":
+    task.priority = 'medium'
+    break;
+    case "3":
+    task.priority = 'high'
+    break;
+  }
+  await task.save();
+  res.redirect('/tasks/task-list');
+}
