@@ -5,8 +5,13 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
-
+//ROUTES
 const authRoutes = require('./routes/auth');
+const tasksRoutes = require('./routes/tasks');
+
+//MODELS
+const User = require('./models/user');
+
 
 const app = express();
 
@@ -27,8 +32,27 @@ app.use(
     store: store
   })
 );
-app.use(authRoutes);
 
+app.use(async(req, res, next) => {
+  if(!req.session.user) {
+    next();
+  }
+
+  let user = await User.findById(req.session.user._id);
+  req.user = user;
+  next();
+})
+
+
+app.use(authRoutes);
+app.use('/tasks',tasksRoutes);
+
+app.use('/', (req, res, next) => {
+  res.render('auth/login', {
+    pageTitle: 'Login',
+    path: '/login'
+  })
+})
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true}).then(()=>{
   console.log('Connected to mongoDb')
   app.listen(3000);

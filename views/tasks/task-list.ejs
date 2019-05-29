@@ -1,0 +1,18 @@
+<%- include('../includes/head.ejs') %>
+</head>
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <h1>TASKS</h1>
+
+  <% tasks.forEach(task=>{ %>
+    <ul>
+      <li><%= task.content %></li>
+    </ul>
+  <% }) %>
+  <form action="/tasks/add-task" method="POST">
+    <label for="content">Tasks:</label>
+    <input type="content" name="content" id="content">
+
+    <button type="submit">Add Task</button>
+  </form>
+<%- include('../includes/end.ejs') %>

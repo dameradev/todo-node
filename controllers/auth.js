@@ -37,7 +37,7 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-console.log('hereee');
+
   let user = await User.findOne({email});
 
   if(!user) {
