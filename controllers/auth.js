@@ -4,7 +4,8 @@ const User = require('../models/user');
 exports.getSignup = (req, res, next) => {
   res.render('auth/signup', {
     pageTitle: 'Sign up',
-    path: '/signup'
+    path: '/signup',
+    isLoggedIn: req.session.isLoggedIn
   })
 }
 exports.postSignup = async (req, res, next) => {
@@ -30,7 +31,8 @@ exports.postSignup = async (req, res, next) => {
 exports.getLogin = (req, res, next) => {
   res.render('auth/login', {
     pageTitle: 'Login',
-    path: '/login'
+    path: '/login',
+    isLoggedIn: req.session.isLoggedIn
   })
 }
 
@@ -52,6 +54,9 @@ exports.postLogin = async (req, res, next) => {
     await req.session.save();
     res.redirect('/');
   }
+}
 
-
+exports.postLogout = async (req, res, next) => {
+  await req.session.destroy();
+  res.redirect('/login');
 }

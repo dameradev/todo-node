@@ -51,9 +51,10 @@ app.use(authRoutes);
 app.use('/tasks',tasksRoutes);
 
 app.use('/', (req, res, next) => {
-  res.render('auth/login', {
-    pageTitle: 'Login',
-    path: '/login'
+  res.render('homepage', {
+    pageTitle: 'Homepage',
+    path: '/home',
+    isLoggedIn: req.session.isLoggedIn
   })
 })
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true}).then(()=>{

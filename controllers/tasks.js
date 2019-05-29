@@ -1,13 +1,17 @@
 const Task = require('../models/task');
 
 exports.getTasks = async (req, res, next) => {
-  const tasks = await Task.find({});
 
-  res.render('tasks/task-list', {
-    pageTitle: "Todo list",
-    path:"/task-list",
-    tasks
-  });
+  if(req.user) {
+    const tasks = await Task.find({ userId: req.user._id });
+    res.render('tasks/task-list', {
+      pageTitle: "Todo list",
+      path:"/task-list",
+      tasks,
+      isLoggedIn: req.session.isLoggedIn
+    });
+  }
+  res.redirect('/login');
 }
 exports.postAddTask = async (req, res, next) => {
   const content = req.body.content;
