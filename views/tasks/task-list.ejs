@@ -12,6 +12,10 @@
         <input type="hidden" name="taskId" value="<%= task._id %>">
         <button type="sumbit">Finish Task</button>
       </form>
+      <form action="/tasks/delete-task" method="POST">
+        <input type="hidden" name="taskId" value="<%= task._id %>">
+        <button type="sumbit">Remove task</button>
+      </form>
     </ul>
   <% }) %>
   <form action="/tasks/add-task" method="POST">

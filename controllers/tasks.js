@@ -34,4 +34,9 @@ exports.postFinishTask = async (req, res, next) => {
   await task.save();
   res.redirect('/tasks/task-list');
 }
-exports.postDeleteTask = (req, res, next) => {}
+exports.postDeleteTask = async (req, res, next) => {
+  const taskId = req.body.taskId;
+  
+  await Task.findOneAndDelete(taskId);
+  res.redirect('/tasks/task-list');
+}

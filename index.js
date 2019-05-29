@@ -1,3 +1,4 @@
+const path = require('path');
 const MONGODB_URI = "mongodb://localhost/todo";
 const mongoose = require('mongoose');
 const express = require('express');
@@ -24,6 +25,8 @@ const store = new MongoDBStore({
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(
   session({
     secret: "my secret",

@@ -8,6 +8,7 @@ router.post('/add-task', tasksController.postAddTask);
 
 // router.get('/login', authController.getLogin);
 router.post('/finish-task', tasksController.postFinishTask);
+router.post('/delete-task', tasksController.postDeleteTask);
 
 
 module.exports = router;
